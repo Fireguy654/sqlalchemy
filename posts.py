@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from flask import Flask, render_template
 from data import db_session
 # from data.news import News
+from data.jobs import Job
 from data.users import User
 from forms.user import RegisterForm
 
@@ -46,15 +47,14 @@ app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 def main():
     db_session.global_init("db/blogs.db")
     db_sess = db_session.create_session()
-    user = User()
-    user.surname = "Marcus"
-    user.name = 'Johnson'
-    user.age = 25
-    user.position = 'crew mate'
-    user.speciality = 'biologist'
-    user.address = 'module_3'
-    user.email = 'blg@mars.org'
-    db_sess.add(user)
+    job = Job()
+    job.team_leader = 1
+    job.job = 'deployment of residential modules 1 and 2'
+    job.work_size = 15
+    job.collaborators = '2, 3'
+    job.start_date = datetime.datetime.now()
+    job.is_finished = False
+    db_sess.add(job)
     db_sess.commit()
     # app.run()
 
